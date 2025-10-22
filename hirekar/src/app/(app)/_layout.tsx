@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Stack } from "expo-router";
 import { useAuth } from "@/src/context/AuthContext";
+import * as SplashScreen from "expo-splash-screen";
+import CustomSplash from "@/src/components/SplashScreen";
+
+SplashScreen.preventAutoHideAsync();
 
 
 const AppLayout = () => {
   const { session, user, loading } = useAuth();
 
-  if (loading) return null; // can show a splash loader here
+   useEffect(() => {
+    if (!loading) {
+      // Hide native splash AFTER loading is done
+      SplashScreen.hideAsync();
+    }
+  }, [loading]);
+
+  if (loading) return <CustomSplash/>; 
 
   if (session && user) {
     return (
@@ -14,17 +25,17 @@ const AppLayout = () => {
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="(modals)/details" />
         <Stack.Screen options={{
-        presentation: 'transparentModal', // This makes all screens in this Stack render as modals
-        headerShown: false,    // Hide the default header
+        presentation: 'transparentModal',
+        headerShown: false,   
       }} name="(modals)/help" />
         <Stack.Screen options={{
-        presentation: 'transparentModal', // This makes all screens in this Stack render as modals
-        headerShown: false,    // Hide the default header
+        presentation: 'transparentModal', 
+        headerShown: false,   
       }} name="(modals)/terms" />
         <Stack.Screen name="(modals)/address" />
         <Stack.Screen options={{
-        presentation: "modal", // This makes all screens in this Stack render as modals
-        headerShown: false,    // Hide the default header
+        presentation: "modal", 
+        headerShown: false,   
       }} name="(modals)/profile" />
       </Stack>
     );
