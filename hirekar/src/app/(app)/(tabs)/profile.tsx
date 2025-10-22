@@ -4,24 +4,33 @@ import {
   TouchableOpacity,
   Dimensions,
   TextInput,
+  StatusBar,
 } from "react-native";
 import Typo from "@/src/components/Typo";
 import { router } from "expo-router";
 import ScreenWrapper from "@/src/components/ScreenWrapper";
 import LottieView from "lottie-react-native";
-import { verticalScale } from "@/src/utils/styling";
 import { colors, radius } from "@/src/constants/theme";
 import { useFonts } from "@expo-google-fonts/quicksand";
 import Button from "@/src/components/Button";
 import { CaretRightIcon } from "phosphor-react-native";
 import DeleteModal from "@/src/components/DeleteModal";
 import LogoutModal from "@/src/components/LogoutModal";
+import { useFocusEffect } from "@react-navigation/native";
+import { scale, verticalScale } from "react-native-size-matters";
+import { RFValue } from "react-native-responsive-fontsize";
+import { responsiveFont, scaleHeight, scaleWidth } from "@/src/utils/styling";
 
 const ProfileTab = () => {
   const [loading, setLoading] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
   const [isModalDelete, setModalDelete] = useState(false);
   const screenHeight = Dimensions.get("window").height;
+
+  useFocusEffect(() => {
+    StatusBar.setBackgroundColor(colors.neutral800);
+    StatusBar.setBarStyle("light-content");
+  });
 
 
   const [fontsLoaded] = useFonts({
@@ -31,8 +40,12 @@ const ProfileTab = () => {
   });
   if (!fontsLoaded) return null;
 
+  
+
   return (
-      <View style={{ paddingHorizontal: verticalScale(15) }}>
+      <ScreenWrapper>
+        <StatusBar backgroundColor={colors.neutral800} />
+        <View style={{ paddingHorizontal: verticalScale(15) }}>
         {/* Top Label */}
         <View
           style={{
@@ -65,7 +78,7 @@ const ProfileTab = () => {
               loop
               style={{ width: 40, height: 60 }}
             />
-            <Typo size={12}>
+            <Typo style={{fontSize: responsiveFont(11)}}>
               Earn{" "}
               <Typo
                 size={14}
@@ -88,7 +101,7 @@ const ProfileTab = () => {
               style={{
                 backgroundColor: colors.primary, // use your app’s primary color
                 borderRadius: radius._10, // match your global radius
-                paddingVertical: verticalScale(8),
+                paddingVertical: scaleHeight(4),
                 paddingHorizontal: verticalScale(16),
                 alignItems: "center",
                 justifyContent: "center",
@@ -97,7 +110,7 @@ const ProfileTab = () => {
                 shadowOpacity: 0.2,
                 shadowRadius: 3,
                 elevation: 3,
-                height: verticalScale(40),
+                height: scaleHeight(40),
               }}
             >
               <Typo
@@ -158,10 +171,10 @@ const ProfileTab = () => {
                 alignItems: "center",
                 backgroundColor: colors.neutral800,
                 borderRadius: radius._10,
-                padding: verticalScale(12),
-                paddingHorizontal: verticalScale(16),
+                padding: scaleHeight(10),
+                paddingHorizontal: scaleWidth(16),
                 shadowColor: "#000",
-                shadowOffset: { width: 0, height: 2 },
+                shadowOffset: { width: 0, height: scaleHeight(2) },
                 shadowOpacity: 0.1,
                 shadowRadius: 4,
                 elevation: 2,
@@ -197,7 +210,7 @@ const ProfileTab = () => {
 
               {/* Optional Arrow */}
               <CaretRightIcon
-                size={32}
+                size={responsiveFont(18)}
                 weight="bold"
                 color={colors.neutral500}
               />
@@ -259,11 +272,12 @@ const ProfileTab = () => {
             </Typo>
           </Button>
           
+   
+      </View>
         </View>
         <DeleteModal isVisible={isModalDelete} onClose={()=>setModalDelete(false)}/>
         <LogoutModal isVisible={isModalVisible} onClose={()=>setModalVisible(false)} />
-   
-      </View>
+      </ScreenWrapper>
   );
 };
 

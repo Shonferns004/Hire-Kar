@@ -2,6 +2,7 @@ import React from "react";
 import { Stack } from "expo-router";
 import { useAuth } from "@/src/context/AuthContext";
 
+
 const AppLayout = () => {
   const { session, user, loading } = useAuth();
 

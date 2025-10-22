@@ -1,11 +1,14 @@
+import ScreenWrapper from '@/src/components/ScreenWrapper'
 import React from 'react'
 import { View, Text } from 'react-native'
 
 const BookingTab = () => {
   return (
-    <View>
-      <Text>BookingTab</Text>
-    </View>
+    <ScreenWrapper>
+      <View>
+        
+      </View>
+    </ScreenWrapper>
   )
 }
 

@@ -16,7 +16,7 @@ import { verticalScale } from "../utils/styling";
 import Typo from "./Typo";
 import Input from "./Input";
 import Button from "./Button";
-import { deleteUser } from "../utils/authAction";
+import { deleteUser, handleLogout } from "../utils/authAction";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 const MODAL_HEIGHT = SCREEN_HEIGHT / 5.6;
@@ -100,7 +100,7 @@ const LogoutModal = ({ isVisible, onClose, onDelete }: any) => {
                   styles.button,
                   { backgroundColor:colors.neutral900 },
                 ]}
-                onPress={handleDelete}
+                onPress={handleLogout}
               >
                 <Typo size={15} style={{ color: colors.rose }}>Delete</Typo>
               </Button>

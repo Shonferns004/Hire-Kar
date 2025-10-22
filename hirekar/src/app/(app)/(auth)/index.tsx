@@ -17,7 +17,7 @@ import Typo from "@/src/components/Typo";
 import Button from "@/src/components/Button";
 import Input from "@/src/components/Input";
 import { colors, spacingX } from "@/src/constants/theme";
-import { verticalScale } from "@/src/utils/styling";
+import { responsiveFont, verticalScale } from "@/src/utils/styling";
 
 const secondsToResend = 30;
 
@@ -152,7 +152,7 @@ const PhoneAuthScreen = () => {
                   styles.appName,
                   {
                     fontFamily: "BrunoAceSC-Regular",
-                    fontSize: 40,
+                    fontSize: responsiveFont(30),
                     color: colors.primary,
                     letterSpacing: 6,
                   },

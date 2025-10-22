@@ -5,6 +5,7 @@ import {
   Platform,
   StyleSheet,
   TouchableOpacity,
+  StatusBar,
 } from "react-native";
 import { useFonts } from "@expo-google-fonts/quicksand";
 import ScreenWrapper from "@/src/components/ScreenWrapper";
@@ -16,11 +17,17 @@ import { verticalScale } from "@/src/utils/styling";
 import { router } from "expo-router";
 import { supabase } from "@/src/config/supabase";
 import IOSLoader from "@/src/components/Loading";
+import { useFocusEffect } from "@react-navigation/native";
 
 const DetailsModal = () => {
   const [name, setName] = useState("");
   const [referral, setReferral] = useState("");
   const [loading, setLoading] = useState(false)
+
+   useFocusEffect(() => {
+      StatusBar.setBackgroundColor(colors.neutral800);
+      StatusBar.setBarStyle("light-content");
+    });
 
   const [fontsLoaded] = useFonts({
     "BrunoAceSC-Regular": require("@/src/assets/fonts/BrunoAceSC-Regular.ttf"),

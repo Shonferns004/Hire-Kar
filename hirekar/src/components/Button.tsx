@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import { CustomButtonProps } from '@/types'
 import Typo from './Typo'
 import { colors, radius } from '../constants/theme'
-import { verticalScale } from '../utils/styling'
+import { scaleHeight, verticalScale } from '../utils/styling'
 import IOSLoader from './Loading'
 
 
@@ -18,7 +18,7 @@ const Button = ({
 
     if (loading) {
         return(
-            <View style={[{backgroundColor: 'transparent',borderRadius: radius._17, borderCurve: 'continuous', height: verticalScale(52)}, style]}>
+            <View style={[{backgroundColor: 'transparent',borderRadius: radius._17, borderCurve: 'continuous', height: scaleHeight(52)}, style]}>
                 <IOSLoader size={20} color={colors.black}/>
             </View>
         )
