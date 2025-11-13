@@ -60,6 +60,15 @@ const PhoneAuthScreen = () => {
     const { data, error } = await supabase.auth.signInWithOtp({
       phone: phoneNumber,
     });
+    if (error && error.message.includes("duplicate key value")) {
+  // Instead of blocking the flow, try login-only mode:
+  await supabase.auth.signInWithOtp({
+    phone: phoneNumber,
+    options: { shouldCreateUser: false },
+  });
+  return;
+}
+
 
     if (error) {
       Alert.alert("Error", error.message);
