@@ -18,6 +18,7 @@ import Button from "@/src/components/Button";
 import Input from "@/src/components/Input";
 import { colors, spacingX } from "@/src/constants/theme";
 import { responsiveFont, verticalScale } from "@/src/utils/styling";
+import { useAuth } from "@/src/context/AuthContext";
 
 const secondsToResend = 30;
 
@@ -29,6 +30,7 @@ const PhoneAuthScreen = () => {
   const [secondsLeft, setSecondsLeft] = useState(secondsToResend);
   const [isResendDisabled, setIsResendDisabled] = useState(true);
   const [loading, setLoading] = useState(false);
+
 
   const [fontsLoaded] = useFonts({
     "BrunoAceSC-Regular": require("@/src/assets/fonts/BrunoAceSC-Regular.ttf"),
